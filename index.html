@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vardex</title>
+<meta name="description" content="Vardex is an R&amp;D consultancy for industrial companies: simulation, real-time software, digital twins, machine learning and robotics.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#F4F2EE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&amp;family=Source+Serif+4:ital,wght@0,400;0,600;1,400&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+:root{
+  --bg:#F4F2EE; --surface:#FBFAF7; --ink:#1C1F1E; --muted:#5C625F; --rule:#DAD5CC; --dash:#C9C3B8;
+  --accent:#2F6E4E; --accent-strong:#1F4D36; --btn-fg:#F4F2EE;
+  --m-far:#E8E5DF; --m-main:#DDD8CE; --strata:#C4BEB2; --trail:#B9B2A6;
+  --stone-1:#C9C3B8; --stone-2:#E4E0D8; --stone-3:#B9B2A6; --stone-4:#D6D1C7;
+  --display:"Bricolage Grotesque","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{max-width:100%}
+a{color:var(--ink)} a:hover{color:var(--accent-strong)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4.5vw,56px)}
+.eyebrow{margin:0;font:500 .75rem/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+.nav{position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:24px;padding-bottom:24px}
+.brand{display:flex;align-items:center;min-height:44px}
+.logo{height:30px;width:auto;display:block}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.nav ul a{color:var(--muted);text-decoration:none;font:500 1rem/1 var(--display)}
+.nav ul a:hover{color:var(--ink)}
+.menu{display:none}
+.menu summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid var(--dash);border-radius:3px;font:500 .95rem/1 var(--display);color:var(--ink);user-select:none}
+.menu summary::-webkit-details-marker{display:none}
+.menu summary svg{width:16px;height:16px}
+.menu[open] summary{border-color:var(--ink)}
+.menu .panel{position:absolute;left:0;right:0;top:100%;z-index:10;margin:0 clamp(20px,4.5vw,56px);background:var(--surface);border:1px solid var(--rule);border-radius:6px;box-shadow:0 12px 32px rgba(28,31,30,.10)}
+.menu .panel ul{display:flex;flex-direction:column;gap:0;padding:6px 0}
+.menu .panel a{display:flex;align-items:center;min-height:48px;padding:0 20px;font:500 1.05rem/1 var(--display);color:var(--ink)}
+.menu .panel li + li a{border-top:1px solid var(--rule)}
+
+.hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:center;padding:48px 0 72px}
+.hero h1{margin:16px 0 24px;font:600 clamp(2.5rem,5.6vw,4.1rem)/1.02 var(--display);letter-spacing:-.035em;max-width:13ch;text-wrap:balance}
+.hero .lead{margin:0 0 32px;font-size:1.2rem;line-height:1.55;max-width:32em}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:3px;background:var(--ink);color:var(--btn-fg);border:1px solid var(--ink);text-decoration:none;font:500 1rem/1 var(--display);transition:background .15s,border-color .15s}
+.btn:hover{background:var(--accent-strong);border-color:var(--accent-strong);color:var(--btn-fg)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--dash)}
+.btn.ghost:hover{border-color:var(--ink);color:var(--ink)}
+.hero figure{margin:0}
+.hero figure svg{width:100%;max-width:520px;height:auto;display:block;margin-left:auto}
+
+.clients{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:10px 48px;align-items:center;padding:26px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.track{display:flex;width:max-content;animation:roll 34s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track ul{display:flex;gap:64px;padding:0 64px 0 0;margin:0;list-style:none;white-space:nowrap}
+.track li{font:600 1.45rem/1 var(--display);letter-spacing:-.01em;color:var(--muted)}
+@keyframes roll{to{transform:translateX(-50%)}}
+
+.sec{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:20px 48px;padding:88px 0;border-top:1px solid var(--rule)}
+.sec.first{border-top:0}
+.sec h2{margin:0 0 18px;font:600 clamp(1.7rem,2.8vw,2.25rem)/1.12 var(--display);letter-spacing:-.025em;max-width:22ch;text-wrap:balance}
+.sec .intro{margin:0;max-width:36em}
+.sec h3{font-family:var(--display);font-weight:600;line-height:1.3}
+
+.services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 32px;margin-top:40px}
+.services > div{border-top:1px solid var(--rule);padding:22px 0 32px}
+.ico{width:28px;height:28px;display:block;margin-bottom:16px}
+.services h3{margin:0 0 8px;font-size:1.15rem}
+.services p{margin:0;color:var(--muted);font-size:1rem;line-height:1.55}
+
+.route{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:36px}
+.route svg{display:block}
+.route .step{margin-top:10px;padding-top:14px;border-top:2px dashed var(--dash)}
+.route .num{margin:0 0 4px;font:400 .75rem/1.4 var(--mono);letter-spacing:.08em;color:var(--muted)}
+.route h3{margin:0 0 6px;font-size:1.06rem}
+.route p{margin:0;color:var(--muted);font-size:.94rem;line-height:1.55}
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:48px}
+.principles > div{border-top:1px solid var(--rule);padding-top:18px}
+.principles h3{margin:0 0 6px;font-size:1.12rem}
+.principles p{margin:0;color:var(--muted);font-size:1rem;line-height:1.55}
+
+.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:32px}
+.person{display:flex;gap:20px;align-items:center;border-top:1px solid var(--rule);padding-top:20px}
+.avatar{flex-shrink:0;width:72px;height:72px;border-radius:50%;background:var(--stone-2);display:flex;align-items:center;justify-content:center;font:500 1.1rem/1 var(--mono);color:var(--ink)}
+.person h3{margin:0 0 2px;font-size:1.25rem}
+.person .role{margin:0;font:400 .8rem/1.6 var(--mono);color:var(--muted)}
+.person .bio{margin:4px 0 0;color:var(--muted);font-size:1rem;line-height:1.5}
+.name-note{margin:40px 0 0;max-width:40em;color:var(--muted);font-size:1rem}
+.name-note strong{color:var(--ink);font-weight:600}
+
+.refs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:32px}
+.refs figure{margin:0;border-top:1px solid var(--rule);padding-top:20px;display:flex;flex-direction:column;gap:18px}
+.refs blockquote{margin:0;font-size:1.06rem;line-height:1.6}
+.refs figcaption{font:400 .8rem/1.6 var(--mono);color:var(--muted)}
+.refs figcaption strong{display:block;font:600 1rem/1.4 var(--display);color:var(--ink)}
+
+.contact .email{display:inline-block;margin-top:28px;font:600 clamp(1.5rem,3.2vw,2.1rem)/1.2 var(--display);letter-spacing:-.02em;color:var(--accent);text-decoration:none;border-bottom:2px solid var(--accent)}
+.contact .email:hover{color:var(--accent-strong);border-color:var(--accent-strong)}
+.contact .meta{margin:24px 0 0;font:400 .8rem/1.6 var(--mono);color:var(--muted)}
+
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;padding:26px 0 48px;border-top:1px solid var(--rule);font:400 .8rem/1.6 var(--mono);color:var(--muted)}
+footer a{color:inherit}
+
+@media (max-width:1000px){
+  .route{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:28px;padding:24px 0 56px}
+  .hero figure svg{max-width:420px;margin:0 auto}
+  .clients{grid-template-columns:1fr;gap:14px 0}
+  .sec{grid-template-columns:1fr;gap:12px 0;padding:60px 0}
+  .services{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .principles,.refs,.people{grid-template-columns:1fr;gap:0}
+  .principles > div,.refs figure,.person{padding-bottom:24px}
+}
+@media (max-width:760px){
+  .nav-links{display:none}
+  .menu{display:block}
+  .nav{padding-top:16px;padding-bottom:16px}
+  .logo{height:26px}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .hero{padding:16px 0 44px}
+  .hero .lead{font-size:1.1rem;margin-bottom:26px}
+  .actions .btn{flex:1 1 auto;justify-content:center}
+  .hero figure svg{max-width:100%}
+  .sec{padding:48px 0}
+  .sec h2{margin-bottom:14px}
+  .services{grid-template-columns:1fr;margin-top:28px}
+  .services > div{display:grid;grid-template-columns:28px 1fr;gap:0 16px;padding:18px 0 22px}
+  .services > div .ico{grid-row:1 / span 2;margin:2px 0 0}
+  .route{grid-template-columns:1fr;gap:0;margin-top:28px}
+  .route li{display:grid;grid-template-columns:44px 1fr;gap:0 16px;align-items:start;padding:14px 0;border-top:1px dashed var(--dash)}
+  .route li:first-child{border-top:0}
+  .route .step{margin:0;padding:0;border:0}
+  .principles{margin-top:28px}
+  .person{gap:16px}
+  .avatar{width:60px;height:60px;font-size:1rem}
+  .refs{margin-top:24px}
+  .track li{font-size:1.2rem}
+  .track ul{gap:44px;padding-right:44px}
+  footer{flex-direction:column;padding-bottom:36px}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .track{animation:none}
+  .dx-flow{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap nav">
+<a class="brand" href="#top" aria-label="Vardex, back to top">
+<svg viewBox="-4 -73.5 321.3 79.5" aria-hidden="true" class="logo"><path d="M17.1 0 0.5 -52.5H15.8L26.3 -12H26.7L37.5 -52.5H52L35.4 0ZM65.7 1.4Q61.6 1.4 58 -0Q54.5 -1.5 52.2 -4.6Q50 -7.7 50 -12.9Q50 -17.7 51.9 -20.8Q53.7 -23.8 56.9 -25.6Q60.1 -27.4 63.9 -28.4Q67.7 -29.4 71.6 -30.1Q76.9 -31.1 79.6 -31.7Q82.2 -32.2 83.1 -33Q84 -33.9 84 -35.4Q84 -38.8 81.6 -40.6Q79.2 -42.3 75.3 -42.3Q73 -42.3 70.6 -41.5Q68.2 -40.6 66.7 -38.4Q65.1 -36.2 65.1 -32.3L52.2 -33.4Q52.2 -39.4 54.2 -43.4Q56.3 -47.3 59.8 -49.6Q63.3 -51.9 67.5 -52.9Q71.7 -53.9 75.8 -53.9Q83.2 -53.9 88.2 -51.2Q93.1 -48.4 95.6 -43.1Q98.1 -37.8 98.1 -30.1V-20.6Q98.1 -17.2 98.1 -13.8Q98.1 -10.3 98.2 -6.9Q98.2 -3.4 98.2 0H85.5Q85.6 -3.8 85.7 -7.7Q85.8 -11.6 85.8 -15.8H85.2Q84.7 -11.1 82.1 -7.2Q79.5 -3.3 75.3 -1Q71.1 1.4 65.7 1.4ZM71.3 -9.3Q73.3 -9.3 75.6 -10.2Q77.8 -11 79.7 -12.8Q81.6 -14.5 82.8 -17.4Q84 -20.2 84 -24.3L84.1 -26.6L86.7 -27.1Q85.9 -25.7 83.9 -24.9Q81.8 -24.1 79.3 -23.7Q76.8 -23.2 74.2 -22.7Q71.6 -22.2 69.4 -21.4Q67.2 -20.6 65.8 -19.1Q64.5 -17.7 64.5 -15.2Q64.5 -12.4 66.4 -10.9Q68.3 -9.3 71.3 -9.3ZM104.1 0V-27.6L104 -52.5H116.6L116.3 -30.7H117.1Q117.7 -39.2 119.5 -44.2Q121.3 -49.3 124.1 -51.5Q126.8 -53.7 130.3 -53.7Q132 -53.7 133.8 -53.2Q135.7 -52.8 137.6 -51.8L136.8 -35.9Q134.8 -37 132.8 -37.5Q130.8 -38.1 129.1 -38.1Q125.7 -38.1 123.3 -36Q120.9 -33.9 119.7 -29.9Q118.4 -25.8 118.4 -20V0ZM159 1.4Q153.3 1.4 148.8 -1.6Q144.2 -4.7 141.5 -10.9Q138.8 -17.1 138.8 -26.7Q138.8 -35.8 141.2 -41.9Q143.7 -47.9 148.1 -50.9Q152.5 -53.9 158.4 -53.9Q163.2 -53.9 166.8 -51.9Q170.4 -49.9 172.7 -45.7Q175 -41.4 175.9 -34.7H176.8Q176.3 -38.5 175.8 -41.9Q175.3 -45.3 175.1 -48.4Q174.8 -51.5 174.8 -54.1V-69.5H189.3L189.2 -19.6L189.3 0H176.6L176.9 -16.6H176.1Q175 -10.7 172.7 -6.7Q170.4 -2.6 167 -0.6Q163.6 1.4 159 1.4ZM163.7 -10.3Q166.1 -10.3 168.2 -11.4Q170.3 -12.5 171.8 -14.6Q173.2 -16.7 174.1 -19.5Q174.9 -22.3 174.9 -25.7V-26.4Q174.9 -29.1 174.4 -31.5Q173.8 -33.8 172.8 -35.7Q171.8 -37.6 170.4 -39Q169 -40.3 167.3 -41Q165.6 -41.7 163.7 -41.7Q160.4 -41.7 158.1 -39.5Q155.7 -37.4 154.6 -33.9Q153.4 -30.3 153.4 -25.8Q153.4 -21.5 154.6 -17.9Q155.8 -14.4 158.1 -12.4Q160.4 -10.3 163.7 -10.3ZM220.4 1.4Q213.3 1.4 208.4 -0.7Q203.4 -2.8 200.3 -6.5Q197.2 -10.2 195.8 -15Q194.4 -19.8 194.4 -25.3Q194.4 -31 195.9 -36.2Q197.3 -41.3 200.3 -45.3Q203.3 -49.3 208.1 -51.6Q212.9 -53.9 219.4 -53.9Q225.9 -53.9 230.6 -51.7Q235.3 -49.4 238.2 -45.4Q241 -41.4 241.9 -36.1Q242.9 -30.7 242 -24.3L203.3 -23.7V-31.8L231 -32.4L229 -27.7Q229.5 -32.3 228.6 -35.6Q227.7 -38.9 225.5 -40.7Q223.2 -42.4 219.4 -42.4Q215.4 -42.4 212.9 -40.4Q210.5 -38.3 209.4 -34.6Q208.3 -30.9 208.3 -26Q208.3 -17.5 211.4 -13.5Q214.4 -9.5 220.5 -9.5Q223.3 -9.5 225.2 -10.2Q227 -11 228.2 -12.4Q229.3 -13.7 229.8 -15.5Q230.2 -17.3 230.1 -19.4L243.3 -18.6Q243.5 -15.1 242.4 -11.6Q241.4 -8 238.8 -5.1Q236.1 -2.2 231.6 -0.4Q227 1.4 220.4 1.4ZM241.7 0 258.6 -26.3 241.8 -52.5H258.6L267.5 -34.6H267.9L276.7 -52.5H293.3L276.9 -26.3L293.5 0H276.5L267.8 -17.6H267.5L258.3 0Z" fill="var(--ink)"></path><path d="M304 1.3Q299.4 1.3 297.1 -0.7Q294.8 -2.7 294.8 -6.9Q294.8 -11.1 297.1 -13.1Q299.4 -15.1 304 -15.1Q308.6 -15.1 311 -13.1Q313.3 -11.1 313.3 -6.9Q313.3 1.3 304 1.3Z" fill="var(--accent)"></path></svg>
+</a>
+<nav class="nav-links" aria-label="Main">
+<ul>
+<li><a href="#services">Services</a></li>
+<li><a href="#how">How we work</a></li>
+<li><a href="#who">Who we are</a></li>
+<li><a href="#references">References</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+<details class="menu">
+<summary aria-label="Open menu"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.5h12M2 8h12M2 11.5h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"></path></svg>Menu</summary>
+<nav class="panel" aria-label="Main">
+<ul>
+<li><a href="#services">Services</a></li>
+<li><a href="#how">How we work</a></li>
+<li><a href="#who">Who we are</a></li>
+<li><a href="#references">References</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+</details>
+</header>
+
+<main class="wrap">
+
+<section class="hero" id="top">
+<div>
+<p class="eyebrow">Research and development · Norway</p>
+<h1>Where the map runs out, we mark the way.</h1>
+<p class="lead">Vardex is an R&amp;D consultancy for industrial companies. We take on the parts nobody has done before, in simulation, real-time software, digital twins, machine learning and robotics.</p>
+<div class="actions">
+<a class="btn" href="#contact">Get in touch</a>
+<a class="btn ghost" href="#services">See what we do</a>
+</div>
+</div>
+<figure>
+<svg viewBox="0 120 520 350" role="img" aria-label="Data points flowing up a mountain along trails, passing smaller cairns on the way to the cairn at the summit">
+<path d="M-10,470 L-10,352 L30,336 L64,346 L104,312 L140,330 L178,470 Z" fill="var(--m-far)"></path>
+<path d="M360,470 L360,262 L392,246 L420,252 L456,224 L488,240 L530,226 L530,470 Z" fill="var(--m-far)"></path>
+<path d="M-10,470 L-10,448 L40,430 L95,404 L130,380 L175,346 L200,318 L232,290 L250,262 L262,240 L272,224 L284,214 L300,210 L318,210 L334,215 L346,226 L360,244 L372,258 L400,288 L438,312 L480,346 L530,372 L530,470 Z" fill="var(--m-main)"></path>
+<path d="M-10,448 L40,430 L95,404 L130,380 L175,346 L200,318 L232,290 L250,262 L262,240 L272,224 L284,214 L300,210 L318,210 L334,215 L346,226 L360,244 L372,258 L400,288 L438,312 L480,346 L530,372" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"></path>
+<path d="M372,304 L402,300 M414,336 L452,340 M444,386 L500,390" fill="none" stroke="var(--strata)" stroke-width="1.2" stroke-linecap="round"></path>
+<path d="M40,478 Q70,440 118,424 M190,478 Q170,440 118,424 M320,478 Q350,430 398,410 M480,478 Q450,440 398,410 M118,424 Q250,392 222,336 M222,336 Q310,300 270,258 Q275,228 300,212 M398,410 Q300,380 352,300 M352,300 Q390,262 334,236 Q320,222 314,212" fill="none" stroke="var(--trail)" stroke-width="1.2" stroke-dasharray="2 4" stroke-linecap="round"></path>
+<g class="dx-flow">
+<circle r="3.4" fill="var(--accent)"><animateMotion path="M40,478 Q70,440 118,424 Q250,392 222,336 Q310,300 270,258 Q275,228 300,212" dur="12.4s" begin="0s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="12.4s" begin="0s" repeatCount="indefinite"></animate></circle>
+<circle r="2.9" fill="var(--bg)" stroke="var(--ink)" stroke-width="1"><animateMotion path="M40,478 Q70,440 118,424 Q250,392 222,336 Q310,300 270,258 Q275,228 300,212" dur="12.4s" begin="-3.47s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="12.4s" begin="-3.47s" repeatCount="indefinite"></animate></circle>
+<circle r="3.4" fill="var(--accent)"><animateMotion path="M40,478 Q70,440 118,424 Q250,392 222,336 Q310,300 270,258 Q275,228 300,212" dur="12.4s" begin="-6.94s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="12.4s" begin="-6.94s" repeatCount="indefinite"></animate></circle>
+<circle r="3.4" fill="var(--accent)"><animateMotion path="M40,478 Q70,440 118,424 Q250,392 222,336 Q310,300 270,258 Q275,228 300,212" dur="12.4s" begin="-10.41s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="12.4s" begin="-10.41s" repeatCount="indefinite"></animate></circle>
+<circle r="2.9" fill="var(--bg)" stroke="var(--ink)" stroke-width="1"><animateMotion path="M190,478 Q170,440 118,424 Q250,392 222,336 Q310,300 270,258 Q275,228 300,212" dur="12.3s" begin="-0.18s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="12.3s" begin="-0.18s" repeatCount="indefinite"></animate></circle>
+<circle r="3.4" fill="var(--accent)"><animateMotion path="M190,478 Q170,440 118,424 Q250,392 222,336 Q310,300 270,258 Q275,228 300,212" dur="12.3s" begin="-4.65s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="12.3s" begin="-4.65s" repeatCount="indefinite"></animate></circle>
+<circle r="3.4" fill="var(--accent)"><animateMotion path="M190,478 Q170,440 118,424 Q250,392 222,336 Q310,300 270,258 Q275,228 300,212" dur="12.3s" begin="-9.12s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="12.3s" begin="-9.12s" repeatCount="indefinite"></animate></circle>
+<circle r="2.9" fill="var(--bg)" stroke="var(--ink)" stroke-width="1"><animateMotion path="M320,478 Q350,430 398,410 Q300,380 352,300 Q390,262 334,236 Q320,222 314,212" dur="10.9s" begin="-1.29s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="10.9s" begin="-1.29s" repeatCount="indefinite"></animate></circle>
+<circle r="3.4" fill="var(--accent)"><animateMotion path="M320,478 Q350,430 398,410 Q300,380 352,300 Q390,262 334,236 Q320,222 314,212" dur="10.9s" begin="-3.99s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="10.9s" begin="-3.99s" repeatCount="indefinite"></animate></circle>
+<circle r="3.4" fill="var(--accent)"><animateMotion path="M320,478 Q350,430 398,410 Q300,380 352,300 Q390,262 334,236 Q320,222 314,212" dur="10.9s" begin="-8s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="10.9s" begin="-8s" repeatCount="indefinite"></animate></circle>
+<circle r="2.9" fill="var(--bg)" stroke="var(--ink)" stroke-width="1"><animateMotion path="M480,478 Q450,440 398,410 Q300,380 352,300 Q390,262 334,236 Q320,222 314,212" dur="10.9s" begin="-1.1s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="10.9s" begin="-1.1s" repeatCount="indefinite"></animate></circle>
+<circle r="3.4" fill="var(--accent)"><animateMotion path="M480,478 Q450,440 398,410 Q300,380 352,300 Q390,262 334,236 Q320,222 314,212" dur="10.9s" begin="-2.9s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="10.9s" begin="-2.9s" repeatCount="indefinite"></animate></circle>
+<circle r="3.4" fill="var(--accent)"><animateMotion path="M480,478 Q450,440 398,410 Q300,380 352,300 Q390,262 334,236 Q320,222 314,212" dur="10.9s" begin="-5.99s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="10.9s" begin="-5.99s" repeatCount="indefinite"></animate></circle>
+<circle r="2.9" fill="var(--bg)" stroke="var(--ink)" stroke-width="1"><animateMotion path="M480,478 Q450,440 398,410 Q300,380 352,300 Q390,262 334,236 Q320,222 314,212" dur="10.9s" begin="-9.09s" repeatCount="indefinite"></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.06;0.9;1" dur="10.9s" begin="-9.09s" repeatCount="indefinite"></animate></circle>
+</g>
+<path d="M102.0,424.1 C102.0,417.6 109.2,417.0 117.2,417.0 C127.6,417.0 134.0,419.2 134.0,423.6 C134.0,427.8 127.6,428.0 118.0,428.0 C107.6,428.0 102.0,427.4 102.0,424.1 Z" fill="var(--stone-1)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M104.5,414.3 C104.5,408.3 110.1,407.8 116.4,407.8 C124.5,407.8 129.5,409.8 129.5,413.8 C129.5,417.6 124.5,417.8 117.0,417.8 C108.9,417.8 104.5,417.3 104.5,414.3 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M110.0,405.5 C110.0,400.1 114.0,399.6 118.5,399.6 C124.4,399.6 128.0,401.4 128.0,405.0 C128.0,408.4 124.4,408.6 119.0,408.6 C113.2,408.6 110.0,408.2 110.0,405.5 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M382.0,410.1 C382.0,403.6 389.2,403.0 397.2,403.0 C407.6,403.0 414.0,405.2 414.0,409.6 C414.0,413.8 407.6,414.0 398.0,414.0 C387.6,414.0 382.0,413.4 382.0,410.1 Z" fill="var(--stone-1)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M384.5,400.3 C384.5,394.3 390.1,393.8 396.4,393.8 C404.5,393.8 409.5,395.8 409.5,399.8 C409.5,403.6 404.5,403.8 397.0,403.8 C388.9,403.8 384.5,403.3 384.5,400.3 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M390.0,391.5 C390.0,386.1 394.1,385.6 398.6,385.6 C404.4,385.6 408.0,387.4 408.0,391.0 C408.0,394.4 404.4,394.6 399.0,394.6 C393.1,394.6 390.0,394.2 390.0,391.5 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M206.8,336.3 C206.8,330.1 213.6,329.6 221.2,329.6 C231.1,329.6 237.2,331.6 237.2,335.8 C237.2,339.8 231.1,340.0 222.0,340.0 C212.1,340.0 206.8,339.5 206.8,336.3 Z" fill="var(--stone-1)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M209.2,327.0 C209.2,321.3 214.5,320.9 220.5,320.9 C228.2,320.9 232.9,322.8 232.9,326.6 C232.9,330.2 228.2,330.4 221.1,330.4 C213.3,330.4 209.2,329.9 209.2,327.0 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M214.4,318.7 C214.4,313.5 218.2,313.1 222.5,313.1 C228.1,313.1 231.5,314.8 231.5,318.2 C231.5,321.5 228.1,321.7 222.9,321.7 C217.4,321.7 214.4,321.2 214.4,318.7 Z" fill="var(--stone-4)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M215.8,311.4 C215.8,307.1 218.4,306.8 221.2,306.8 C224.9,306.8 227.2,308.2 227.2,311.1 C227.2,313.8 224.9,313.9 221.5,313.9 C217.8,313.9 215.8,313.5 215.8,311.4 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M336.8,300.3 C336.8,294.1 343.6,293.6 351.2,293.6 C361.1,293.6 367.2,295.6 367.2,299.8 C367.2,303.8 361.1,304.0 352.0,304.0 C342.1,304.0 336.8,303.5 336.8,300.3 Z" fill="var(--stone-1)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M339.2,291.0 C339.2,285.3 344.5,284.9 350.5,284.9 C358.2,284.9 362.9,286.8 362.9,290.6 C362.9,294.2 358.2,294.4 351.1,294.4 C343.3,294.4 339.2,293.9 339.2,291.0 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M344.4,282.7 C344.4,277.5 348.2,277.1 352.5,277.1 C358.1,277.1 361.5,278.8 361.5,282.2 C361.5,285.5 358.1,285.7 352.9,285.7 C347.4,285.7 344.4,285.2 344.4,282.7 Z" fill="var(--stone-4)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M345.8,275.4 C345.8,271.1 348.4,270.8 351.2,270.8 C354.9,270.8 357.2,272.2 357.2,275.1 C357.2,277.8 354.9,277.9 351.5,277.9 C347.8,277.9 345.8,277.5 345.8,275.4 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M277.0,208.1 C277.0,197.8 290.5,197.0 305.5,197.0 C325.0,197.0 337.0,200.4 337.0,207.2 C337.0,213.7 325.0,214.0 307.0,214.0 C287.5,214.0 277.0,213.2 277.0,208.1 Z" fill="var(--stone-1)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"></path>
+<path d="M280.0,192.4 C280.0,183.1 291.2,182.3 303.8,182.3 C320.0,182.3 330.0,185.4 330.0,191.6 C330.0,197.5 320.0,197.8 305.0,197.8 C288.8,197.8 280.0,197.0 280.0,192.4 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"></path>
+<path d="M288.5,178.2 C288.5,169.8 297.5,169.1 307.5,169.1 C320.5,169.1 328.5,171.9 328.5,177.5 C328.5,182.8 320.5,183.1 308.5,183.1 C295.5,183.1 288.5,182.4 288.5,178.2 Z" fill="var(--stone-3)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"></path>
+<path d="M291.0,165.5 C291.0,158.0 297.8,157.4 305.2,157.4 C315.0,157.4 321.0,159.9 321.0,164.9 C321.0,169.7 315.0,169.9 306.0,169.9 C296.2,169.9 291.0,169.3 291.0,165.5 Z" fill="var(--stone-4)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"></path>
+<path d="M298.5,154.5 C298.5,148.2 302.8,147.7 307.5,147.7 C313.7,147.7 317.5,149.8 317.5,154.0 C317.5,158.0 313.7,158.2 308.0,158.2 C301.8,158.2 298.5,157.7 298.5,154.5 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"></path>
+</svg>
+</figure>
+</section>
+
+<section class="clients" aria-label="Clients">
+<p class="eyebrow">We've worked with</p>
+<div class="marquee">
+<div class="track">
+<ul><li>VOCA</li><li>Optilift</li><li>Broomstick</li><li>Ogtech</li><li>Hy4mar</li><li>Greentech Innovators</li></ul>
+<ul aria-hidden="true"><li>VOCA</li><li>Optilift</li><li>Broomstick</li><li>Ogtech</li><li>Hy4mar</li><li>Greentech Innovators</li></ul>
+</div>
+</div>
+</section>
+
+<section class="sec first" id="services">
+<div><p class="eyebrow">01 · Services</p></div>
+<div>
+<h2>We're not specialists in one thing.</h2>
+<p class="intro">Most of our projects sit between physics, software and machines. This is what we do most.</p>
+<div class="services">
+<div>
+<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="ico"><path d="M2 12Q5 4 8 12T14 12T20 12"></path><path d="M2 12h20" stroke-dasharray="1.5 3" opacity=".5"></path></svg>
+<h3>Simulation</h3>
+<p>Physics-based and data-driven models of equipment and processes, so you can test before you build.</p>
+</div>
+<div>
+<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="ico"><circle cx="12" cy="13" r="8"></circle><path d="M12 13V9M12 13l3 2M12 5V2M9 2h6M19 6l1.5-1.5"></path></svg>
+<h3>Real-time software</h3>
+<p>Control, fieldbuses and edge software on PLCs and industrial PCs, plus the interfaces around them.</p>
+</div>
+<div>
+<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="ico"><ellipse cx="12" cy="5.5" rx="8" ry="3"></ellipse><path d="M4 5.5v13c0 1.7 3.6 3 8 3s8-1.3 8-3v-13M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg>
+<h3>Data collection and storage</h3>
+<p>Time series, history and alarms, from equipment in the field to where it's useful.</p>
+</div>
+<div>
+<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="ico"><rect x="3" y="3" width="11" height="11" rx="1"></rect><rect x="10" y="10" width="11" height="11" rx="1" stroke-dasharray="2.5 2"></rect></svg>
+<h3>Digital twins</h3>
+<p>A running model of the plant on real data, for training, testing and operations.</p>
+</div>
+<div>
+<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="ico"><circle cx="4" cy="12" r="2"></circle><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="19" r="2"></circle><circle cx="20" cy="12" r="2"></circle><path d="M5.6 10.8 10.4 6.4M5.6 13.2l4.8 4.4M13.6 6.4l4.8 4.4M13.6 17.6l4.8-4.4"></path></svg>
+<h3>Machine learning</h3>
+<p>Where it makes sense. We'll also tell you when a simpler model is enough.</p>
+</div>
+<div>
+<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="ico"><path d="M3 21h10M8 21v-7l6-6h4M18 8l2.5-2.5M18 8l2.5 2.5"></path><circle cx="8" cy="14" r="1.6"></circle><circle cx="14" cy="8" r="1.6"></circle></svg>
+<h3>Robotics</h3>
+<p>Autonomy, motion planning and integrating robots into existing production.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="how">
+<div><p class="eyebrow">02 · How we work</p></div>
+<div>
+<h2>Research first. Then build.</h2>
+<p class="intro">Every project follows the same route, so you always know where we are.</p>
+<ol class="route" style="list-style:none;padding:0">
+<li>
+<svg width="44" height="48" viewBox="0 0 44 48" aria-hidden="true"><path d="M5.0,43.2 C5.0,38.4 12.6,38.0 21.1,38.0 C32.2,38.0 39.0,39.6 39.0,42.8 C39.0,45.8 32.2,46.0 22.0,46.0 C10.9,46.0 5.0,45.6 5.0,43.2 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path></svg>
+<div class="step">
+<p class="num">01</p>
+<h3>Survey</h3>
+<p>Papers, standards, your data and the people on the floor.</p>
+</div>
+</li>
+<li>
+<svg width="44" height="48" viewBox="0 0 44 48" aria-hidden="true"><path d="M5.0,43.2 C5.0,38.4 12.6,38.0 21.1,38.0 C32.2,38.0 39.0,39.6 39.0,42.8 C39.0,45.8 32.2,46.0 22.0,46.0 C10.9,46.0 5.0,45.6 5.0,43.2 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M7.0,35.9 C7.0,31.4 13.3,31.0 20.3,31.0 C29.4,31.0 35.0,32.5 35.0,35.5 C35.0,38.4 29.4,38.5 21.0,38.5 C11.9,38.5 7.0,38.1 7.0,35.9 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path></svg>
+<div class="step">
+<p class="num">02</p>
+<h3>Hypothesis</h3>
+<p>What we think is true, and what would prove us wrong.</p>
+</div>
+</li>
+<li>
+<svg width="44" height="48" viewBox="0 0 44 48" aria-hidden="true"><path d="M5.0,43.2 C5.0,38.4 12.6,38.0 21.1,38.0 C32.2,38.0 39.0,39.6 39.0,42.8 C39.0,45.8 32.2,46.0 22.0,46.0 C10.9,46.0 5.0,45.6 5.0,43.2 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M7.0,35.9 C7.0,31.4 13.3,31.0 20.3,31.0 C29.4,31.0 35.0,32.5 35.0,35.5 C35.0,38.4 29.4,38.5 21.0,38.5 C11.9,38.5 7.0,38.1 7.0,35.9 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M11.5,29.1 C11.5,24.9 16.7,24.5 22.4,24.5 C29.9,24.5 34.5,25.9 34.5,28.7 C34.5,31.4 29.9,31.5 23.0,31.5 C15.5,31.5 11.5,31.1 11.5,29.1 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path></svg>
+<div class="step">
+<p class="num">03</p>
+<h3>Experiment</h3>
+<p>The smallest test that answers the question.</p>
+</div>
+</li>
+<li>
+<svg width="44" height="48" viewBox="0 0 44 48" aria-hidden="true"><path d="M5.0,43.2 C5.0,38.4 12.6,38.0 21.1,38.0 C32.2,38.0 39.0,39.6 39.0,42.8 C39.0,45.8 32.2,46.0 22.0,46.0 C10.9,46.0 5.0,45.6 5.0,43.2 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M7.0,35.9 C7.0,31.4 13.3,31.0 20.3,31.0 C29.4,31.0 35.0,32.5 35.0,35.5 C35.0,38.4 29.4,38.5 21.0,38.5 C11.9,38.5 7.0,38.1 7.0,35.9 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M11.5,29.1 C11.5,24.9 16.7,24.5 22.4,24.5 C29.9,24.5 34.5,25.9 34.5,28.7 C34.5,31.4 29.9,31.5 23.0,31.5 C15.5,31.5 11.5,31.1 11.5,29.1 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M12.5,22.7 C12.5,18.8 16.6,18.5 21.1,18.5 C26.9,18.5 30.5,19.8 30.5,22.4 C30.5,24.9 26.9,25.0 21.5,25.0 C15.6,25.0 12.5,24.7 12.5,22.7 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path></svg>
+<div class="step">
+<p class="num">04</p>
+<h3>Measure</h3>
+<p>Against reality, not against what we hoped.</p>
+</div>
+</li>
+<li>
+<svg width="44" height="48" viewBox="0 0 44 48" aria-hidden="true"><path d="M5.0,43.2 C5.0,38.4 12.6,38.0 21.1,38.0 C32.2,38.0 39.0,39.6 39.0,42.8 C39.0,45.8 32.2,46.0 22.0,46.0 C10.9,46.0 5.0,45.6 5.0,43.2 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M7.0,35.9 C7.0,31.4 13.3,31.0 20.3,31.0 C29.4,31.0 35.0,32.5 35.0,35.5 C35.0,38.4 29.4,38.5 21.0,38.5 C11.9,38.5 7.0,38.1 7.0,35.9 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M11.5,29.1 C11.5,24.9 16.7,24.5 22.4,24.5 C29.9,24.5 34.5,25.9 34.5,28.7 C34.5,31.4 29.9,31.5 23.0,31.5 C15.5,31.5 11.5,31.1 11.5,29.1 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M12.5,22.7 C12.5,18.8 16.6,18.5 21.1,18.5 C26.9,18.5 30.5,19.8 30.5,22.4 C30.5,24.9 26.9,25.0 21.5,25.0 C15.6,25.0 12.5,24.7 12.5,22.7 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M16.0,16.9 C16.0,13.3 18.9,13.0 22.2,13.0 C26.4,13.0 29.0,14.2 29.0,16.6 C29.0,18.9 26.4,19.0 22.5,19.0 C18.3,19.0 16.0,18.7 16.0,16.9 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path></svg>
+<div class="step">
+<p class="num">05</p>
+<h3>Mark the way</h3>
+<p>Notes, code and tests the next person can follow.</p>
+</div>
+</li>
+</ol>
+<div class="principles">
+<div>
+<h3>Prototype early</h3>
+<p>Something running in week two, not after the pre-study.</p>
+</div>
+<div>
+<h3>AI-assisted, engineer-owned</h3>
+<p>We use AI every day. Engineers read, test and stand behind everything that ships.</p>
+</div>
+<div>
+<h3>Built to hand over</h3>
+<p>Code, models and documentation you can carry on without us.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="who">
+<div><p class="eyebrow">03 · Who we are</p></div>
+<div>
+<h2>The people doing the work.</h2>
+<p class="intro">When you work with Vardex, you work directly with us.</p>
+<div class="people">
+<div class="person">
+<div class="avatar" aria-hidden="true">EL</div>
+<div>
+<h3>Even Falkenberg Langås</h3>
+<p class="role">[Role]</p>
+<p class="bio">[Background in one line]</p>
+</div>
+</div>
+<div class="person">
+<div class="avatar" aria-hidden="true">MØ</div>
+<div>
+<h3>Martin Økter</h3>
+<p class="role">[Role]</p>
+<p class="bio">[Background in one line]</p>
+</div>
+</div>
+</div>
+<p class="name-note"><strong>About the name.</strong> <i>Varde</i> is Norwegian for cairn: stones stacked to mark the route across open mountain. The x is the unknown we're solving for.</p>
+</div>
+</section>
+
+<section class="sec" id="references">
+<div><p class="eyebrow">04 · References</p></div>
+<div>
+<h2>Some of the people we've worked for.</h2>
+<div class="refs">
+<figure>
+<blockquote>“Vardex built the control system and operator screens for our oxygen plants, plus a simulator that lets us test without touching the equipment. They understand how the plant works quickly, and they speak up when something should be done differently.”</blockquote>
+<figcaption><strong>Ogtech</strong>[Name], [role]</figcaption>
+</figure>
+<figure>
+<blockquote>“We came with an idea and a fairly loosely defined problem. Vardex had a working prototype within a few weeks and were open about what was uncertain along the way. That made decisions easy.”</blockquote>
+<figcaption><strong>Broomstick</strong>[Name], [role]</figcaption>
+</figure>
+<figure>
+<blockquote>“We needed a simulation model of our system and someone who could see the whole picture from physics to software. Vardex delivered both, and documented the work so we could carry on ourselves.”</blockquote>
+<figcaption><strong>Hy4mar</strong>[Name], [role]</figcaption>
+</figure>
+</div>
+</div>
+</section>
+
+<section class="sec contact" id="contact">
+<div><p class="eyebrow">05 · Contact</p></div>
+<div>
+<h2>Not sure which way to go? Let's talk.</h2>
+<p class="intro">Tell us briefly what you're working on. We reply within a couple of days.</p>
+<a class="email" href="mailto:hello@vardex.io">hello@vardex.io</a>
+<p class="meta">Norway · We travel to where the equipment is.</p>
+</div>
+</section>
+
+</main>
+
+<footer class="wrap">
+<span>Vardex AS · Org. no. [xxx xxx xxx] · <a href="mailto:hello@vardex.io">hello@vardex.io</a></span>
+<span>© 2026 Vardex</span>
+</footer>
+
+<script>
+(function(){
+  var m=document.querySelector('.menu');
+  if(!m) return;
+  m.addEventListener('click',function(e){ if(e.target.closest('a')) m.removeAttribute('open'); });
+  document.addEventListener('click',function(e){ if(m.open && !m.contains(e.target)) m.removeAttribute('open'); });
+})();
+</script>
+</body>
+</html>
