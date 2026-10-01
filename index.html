@@ -92,7 +92,10 @@ a{color:var(--ink)} a:hover{color:var(--accent-strong)}
 .name-note{margin:40px 0 0;max-width:40em;color:var(--muted);font-size:1rem}
 .name-note strong{color:var(--ink);font-weight:600}
 
-.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px;margin-top:32px}
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px;margin-top:32px;min-width:0}
+.refs-dots{display:none;gap:10px;align-items:center;margin-top:22px}
+.refs-dot{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:var(--rule);cursor:pointer;transition:background .18s ease,transform .18s ease}
+.refs-dot[aria-current="true"]{background:var(--accent);transform:scale(1.25)}
 .refs figure{margin:0;border-top:1px solid var(--rule);padding-top:20px;display:flex;flex-direction:column;gap:18px}
 .refs blockquote{margin:0;font-size:1.06rem;line-height:1.6;max-width:62ch}
 .refs .translation{margin:0;max-width:62ch;font-size:.95rem;line-height:1.6;color:var(--muted)}
@@ -114,8 +117,10 @@ footer a{color:inherit}
   .clients{grid-template-columns:1fr;gap:14px 0}
   .sec{grid-template-columns:1fr;gap:12px 0;padding:60px 0}
   .services{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .refs{grid-template-columns:1fr;gap:0}
-  .refs figure{padding-bottom:24px}
+  .refs{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:100%;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .refs::-webkit-scrollbar{display:none}
+  .refs figure{scroll-snap-align:start;min-width:0}
+  .refs-dots{display:flex}
   .person{gap:20px}
   .avatar{width:72px;height:72px}
 }
@@ -145,6 +150,7 @@ footer a{color:inherit}
 }
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
+  .refs-dot{transition:none}
   .track{animation:none}
   .dx-flow{display:none}
 }
@@ -319,7 +325,7 @@ footer a{color:inherit}
 <div><p class="eyebrow">03 · References</p></div>
 <div>
 <h2>Some of the people we've worked for.</h2>
-<div class="refs">
+<div class="refs" id="refs-track" role="group" aria-label="References, swipe to move between them">
 <figure>
 <blockquote lang="nb">“Even har utført et fremragende og presist utviklingsarbeid med den digitale tvillingen for vår patenterte Hydrogen Transfer-prosess finansiert av Innovasjon Norge. Den har høstet mange lovord fra kunder og partnere.”</blockquote>
 <p class="translation" lang="en">“Even has carried out outstanding and precise development work on the digital twin for our patented Hydrogen Transfer process, funded by Innovasjon Norge. It has drawn much praise from customers and partners.”</p>
@@ -330,6 +336,7 @@ footer a{color:inherit}
 <figcaption><strong>Broomstick</strong>Jim Sivertsen, daglig leder</figcaption>
 </figure>
 </div>
+<div class="refs-dots" id="refs-dots"></div>
 </div>
 </section>
 
@@ -355,6 +362,34 @@ footer a{color:inherit}
   if(!m) return;
   m.addEventListener('click',function(e){ if(e.target.closest('a')) m.removeAttribute('open'); });
   document.addEventListener('click',function(e){ if(m.open && !m.contains(e.target)) m.removeAttribute('open'); });
+})();
+(function(){
+  var track=document.getElementById('refs-track'), dots=document.getElementById('refs-dots');
+  if(!track||!dots) return;
+  var slides=Array.prototype.slice.call(track.children);
+  if(slides.length<2) return;
+  slides.forEach(function(slide,i){
+    var b=document.createElement('button');
+    b.className='refs-dot'; b.type='button';
+    b.setAttribute('aria-label','Go to reference '+(i+1)+' of '+slides.length);
+    b.addEventListener('click',function(){ track.scrollTo({left:slide.offsetLeft-track.offsetLeft,behavior:'smooth'}); });
+    dots.appendChild(b);
+  });
+  function sync(){
+    var mid=track.scrollLeft+track.clientWidth/2, active=0;
+    slides.forEach(function(slide,i){
+      var left=slide.offsetLeft-track.offsetLeft;
+      if(mid>=left && mid<left+slide.offsetWidth) active=i;
+    });
+    Array.prototype.forEach.call(dots.children,function(d,i){ d.setAttribute('aria-current', i===active?'true':'false'); });
+  }
+  var ticking=false;
+  track.addEventListener('scroll',function(){
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(function(){ sync(); ticking=false; });
+  });
+  window.addEventListener('resize',sync);
+  sync();
 })();
 </script>
 </body>
