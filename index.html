@@ -83,12 +83,12 @@ a{color:var(--ink)} a:hover{color:var(--accent-strong)}
 .services p{margin:0;color:var(--muted);font-size:1rem;line-height:1.55}
 
 
-.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:32px}
-.person{display:flex;gap:20px;align-items:center;border-top:1px solid var(--rule);padding-top:20px}
-.avatar{flex-shrink:0;width:72px;height:72px;border-radius:50%;background:var(--stone-2);display:block;object-fit:cover;object-position:50% 50%}
+.people{display:grid;grid-template-columns:1fr;gap:0;margin-top:32px}
+.person{display:flex;gap:24px;align-items:flex-start;border-top:1px solid var(--rule);padding:20px 0 24px}
+.avatar{flex-shrink:0;width:88px;height:88px;border-radius:50%;background:var(--stone-2);display:block;object-fit:cover;object-position:50% 50%}
 .person h3{margin:0 0 2px;font-size:1.25rem}
 .person .role{margin:0;font:400 .8rem/1.6 var(--mono);color:var(--muted)}
-.person .bio{margin:4px 0 0;color:var(--muted);font-size:1rem;line-height:1.5}
+.person .bio{margin:4px 0 0;max-width:52ch;color:var(--muted);font-size:1rem;line-height:1.5}
 .name-note{margin:40px 0 0;max-width:40em;color:var(--muted);font-size:1rem}
 .name-note strong{color:var(--ink);font-weight:600}
 
@@ -114,8 +114,10 @@ footer a{color:inherit}
   .clients{grid-template-columns:1fr;gap:14px 0}
   .sec{grid-template-columns:1fr;gap:12px 0;padding:60px 0}
   .services{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .refs,.people{grid-template-columns:1fr;gap:0}
-  .refs figure,.person{padding-bottom:24px}
+  .refs{grid-template-columns:1fr;gap:0}
+  .refs figure{padding-bottom:24px}
+  .person{gap:20px}
+  .avatar{width:72px;height:72px}
 }
 @media (max-width:760px){
   .nav-links{display:none}
