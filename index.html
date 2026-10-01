@@ -82,10 +82,6 @@ a{color:var(--ink)} a:hover{color:var(--accent-strong)}
 .services h3{margin:0 0 8px;font-size:1.15rem}
 .services p{margin:0;color:var(--muted);font-size:1rem;line-height:1.55}
 
-.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:32px}
-.principles > div{border-top:1px solid var(--rule);padding-top:18px}
-.principles h3{margin:0 0 6px;font-size:1.12rem}
-.principles p{margin:0;color:var(--muted);font-size:1rem;line-height:1.55}
 
 .people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:32px}
 .person{display:flex;gap:20px;align-items:center;border-top:1px solid var(--rule);padding-top:20px}
@@ -118,8 +114,8 @@ footer a{color:inherit}
   .clients{grid-template-columns:1fr;gap:14px 0}
   .sec{grid-template-columns:1fr;gap:12px 0;padding:60px 0}
   .services{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .principles,.refs,.people{grid-template-columns:1fr;gap:0}
-  .principles > div,.refs figure,.person{padding-bottom:24px}
+  .refs,.people{grid-template-columns:1fr;gap:0}
+  .refs figure,.person{padding-bottom:24px}
 }
 @media (max-width:760px){
   .nav-links{display:none}
@@ -138,7 +134,6 @@ footer a{color:inherit}
   .services{grid-template-columns:1fr;margin-top:28px}
   .services > div{display:grid;grid-template-columns:28px 1fr;gap:0 16px;padding:18px 0 22px}
   .services > div .ico{grid-row:1 / span 2;margin:2px 0 0}
-  .principles{margin-top:28px}
   .person{gap:16px}
   .avatar{width:60px;height:60px}
   .refs{margin-top:24px}
@@ -162,7 +157,6 @@ footer a{color:inherit}
 <nav class="nav-links" aria-label="Main">
 <ul>
 <li><a href="#services">Services</a></li>
-<li><a href="#how">How we work</a></li>
 <li><a href="#who">Who we are</a></li>
 <li><a href="#references">References</a></li>
 <li><a href="#contact">Contact</a></li>
@@ -173,7 +167,6 @@ footer a{color:inherit}
 <nav class="panel" aria-label="Main">
 <ul>
 <li><a href="#services">Services</a></li>
-<li><a href="#how">How we work</a></li>
 <li><a href="#who">Who we are</a></li>
 <li><a href="#references">References</a></li>
 <li><a href="#contact">Contact</a></li>
@@ -291,29 +284,8 @@ footer a{color:inherit}
 </div>
 </section>
 
-<section class="sec" id="how">
-<div><p class="eyebrow">02 · How we work</p></div>
-<div>
-<h2>Research first. Then build.</h2>
-<div class="principles">
-<div>
-<h3>Prototype early</h3>
-<p>Something running in week two, not after the pre-study.</p>
-</div>
-<div>
-<h3>AI-assisted, engineer-owned</h3>
-<p>We use AI every day. Engineers read, test and stand behind everything that ships.</p>
-</div>
-<div>
-<h3>Built to hand over</h3>
-<p>Code, models and documentation you can carry on without us.</p>
-</div>
-</div>
-</div>
-</section>
-
 <section class="sec" id="who">
-<div><p class="eyebrow">03 · Who we are</p></div>
+<div><p class="eyebrow">02 · Who we are</p></div>
 <div>
 <h2>The people doing the work.</h2>
 <p class="intro">When you work with Vardex, you work directly with us.</p>
@@ -342,7 +314,7 @@ footer a{color:inherit}
 </section>
 
 <section class="sec" id="references">
-<div><p class="eyebrow">04 · References</p></div>
+<div><p class="eyebrow">03 · References</p></div>
 <div>
 <h2>Some of the people we've worked for.</h2>
 <div class="refs">
@@ -356,7 +328,7 @@ footer a{color:inherit}
 </section>
 
 <section class="sec contact" id="contact">
-<div><p class="eyebrow">05 · Contact</p></div>
+<div><p class="eyebrow">04 · Contact</p></div>
 <div>
 <h2>Not sure which way to go? Let's talk.</h2>
 <p class="intro">Tell us briefly what you're working on. We reply within a couple of days.</p>
