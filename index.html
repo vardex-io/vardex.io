@@ -82,13 +82,7 @@ a{color:var(--ink)} a:hover{color:var(--accent-strong)}
 .services h3{margin:0 0 8px;font-size:1.15rem}
 .services p{margin:0;color:var(--muted);font-size:1rem;line-height:1.55}
 
-.route{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:36px}
-.route svg{display:block}
-.route .step{margin-top:10px;padding-top:14px;border-top:2px dashed var(--dash)}
-.route .num{margin:0 0 4px;font:400 .75rem/1.4 var(--mono);letter-spacing:.08em;color:var(--muted)}
-.route h3{margin:0 0 6px;font-size:1.06rem}
-.route p{margin:0;color:var(--muted);font-size:.94rem;line-height:1.55}
-.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:48px}
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:32px}
 .principles > div{border-top:1px solid var(--rule);padding-top:18px}
 .principles h3{margin:0 0 6px;font-size:1.12rem}
 .principles p{margin:0;color:var(--muted);font-size:1rem;line-height:1.55}
@@ -117,7 +111,6 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;pa
 footer a{color:inherit}
 
 @media (max-width:1000px){
-  .route{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (max-width:860px){
   .hero{grid-template-columns:1fr;gap:28px;padding:24px 0 56px}
@@ -145,10 +138,6 @@ footer a{color:inherit}
   .services{grid-template-columns:1fr;margin-top:28px}
   .services > div{display:grid;grid-template-columns:28px 1fr;gap:0 16px;padding:18px 0 22px}
   .services > div .ico{grid-row:1 / span 2;margin:2px 0 0}
-  .route{grid-template-columns:1fr;gap:0;margin-top:28px}
-  .route li{display:grid;grid-template-columns:44px 1fr;gap:0 16px;align-items:start;padding:14px 0;border-top:1px dashed var(--dash)}
-  .route li:first-child{border-top:0}
-  .route .step{margin:0;padding:0;border:0}
   .principles{margin-top:28px}
   .person{gap:16px}
   .avatar{width:60px;height:60px}
@@ -306,49 +295,6 @@ footer a{color:inherit}
 <div><p class="eyebrow">02 · How we work</p></div>
 <div>
 <h2>Research first. Then build.</h2>
-<p class="intro">Every project follows the same route, so you always know where we are.</p>
-<ol class="route" style="list-style:none;padding:0">
-<li>
-<svg width="44" height="48" viewBox="0 0 44 48" aria-hidden="true"><path d="M5.0,43.2 C5.0,38.4 12.6,38.0 21.1,38.0 C32.2,38.0 39.0,39.6 39.0,42.8 C39.0,45.8 32.2,46.0 22.0,46.0 C10.9,46.0 5.0,45.6 5.0,43.2 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path></svg>
-<div class="step">
-<p class="num">01</p>
-<h3>Survey</h3>
-<p>Papers, standards, your data and the people on the floor.</p>
-</div>
-</li>
-<li>
-<svg width="44" height="48" viewBox="0 0 44 48" aria-hidden="true"><path d="M5.0,43.2 C5.0,38.4 12.6,38.0 21.1,38.0 C32.2,38.0 39.0,39.6 39.0,42.8 C39.0,45.8 32.2,46.0 22.0,46.0 C10.9,46.0 5.0,45.6 5.0,43.2 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M7.0,35.9 C7.0,31.4 13.3,31.0 20.3,31.0 C29.4,31.0 35.0,32.5 35.0,35.5 C35.0,38.4 29.4,38.5 21.0,38.5 C11.9,38.5 7.0,38.1 7.0,35.9 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path></svg>
-<div class="step">
-<p class="num">02</p>
-<h3>Hypothesis</h3>
-<p>What we think is true, and what would prove us wrong.</p>
-</div>
-</li>
-<li>
-<svg width="44" height="48" viewBox="0 0 44 48" aria-hidden="true"><path d="M5.0,43.2 C5.0,38.4 12.6,38.0 21.1,38.0 C32.2,38.0 39.0,39.6 39.0,42.8 C39.0,45.8 32.2,46.0 22.0,46.0 C10.9,46.0 5.0,45.6 5.0,43.2 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M7.0,35.9 C7.0,31.4 13.3,31.0 20.3,31.0 C29.4,31.0 35.0,32.5 35.0,35.5 C35.0,38.4 29.4,38.5 21.0,38.5 C11.9,38.5 7.0,38.1 7.0,35.9 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M11.5,29.1 C11.5,24.9 16.7,24.5 22.4,24.5 C29.9,24.5 34.5,25.9 34.5,28.7 C34.5,31.4 29.9,31.5 23.0,31.5 C15.5,31.5 11.5,31.1 11.5,29.1 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path></svg>
-<div class="step">
-<p class="num">03</p>
-<h3>Experiment</h3>
-<p>The smallest test that answers the question.</p>
-</div>
-</li>
-<li>
-<svg width="44" height="48" viewBox="0 0 44 48" aria-hidden="true"><path d="M5.0,43.2 C5.0,38.4 12.6,38.0 21.1,38.0 C32.2,38.0 39.0,39.6 39.0,42.8 C39.0,45.8 32.2,46.0 22.0,46.0 C10.9,46.0 5.0,45.6 5.0,43.2 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M7.0,35.9 C7.0,31.4 13.3,31.0 20.3,31.0 C29.4,31.0 35.0,32.5 35.0,35.5 C35.0,38.4 29.4,38.5 21.0,38.5 C11.9,38.5 7.0,38.1 7.0,35.9 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M11.5,29.1 C11.5,24.9 16.7,24.5 22.4,24.5 C29.9,24.5 34.5,25.9 34.5,28.7 C34.5,31.4 29.9,31.5 23.0,31.5 C15.5,31.5 11.5,31.1 11.5,29.1 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M12.5,22.7 C12.5,18.8 16.6,18.5 21.1,18.5 C26.9,18.5 30.5,19.8 30.5,22.4 C30.5,24.9 26.9,25.0 21.5,25.0 C15.6,25.0 12.5,24.7 12.5,22.7 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path></svg>
-<div class="step">
-<p class="num">04</p>
-<h3>Measure</h3>
-<p>Against reality, not against what we hoped.</p>
-</div>
-</li>
-<li>
-<svg width="44" height="48" viewBox="0 0 44 48" aria-hidden="true"><path d="M5.0,43.2 C5.0,38.4 12.6,38.0 21.1,38.0 C32.2,38.0 39.0,39.6 39.0,42.8 C39.0,45.8 32.2,46.0 22.0,46.0 C10.9,46.0 5.0,45.6 5.0,43.2 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M7.0,35.9 C7.0,31.4 13.3,31.0 20.3,31.0 C29.4,31.0 35.0,32.5 35.0,35.5 C35.0,38.4 29.4,38.5 21.0,38.5 C11.9,38.5 7.0,38.1 7.0,35.9 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M11.5,29.1 C11.5,24.9 16.7,24.5 22.4,24.5 C29.9,24.5 34.5,25.9 34.5,28.7 C34.5,31.4 29.9,31.5 23.0,31.5 C15.5,31.5 11.5,31.1 11.5,29.1 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M12.5,22.7 C12.5,18.8 16.6,18.5 21.1,18.5 C26.9,18.5 30.5,19.8 30.5,22.4 C30.5,24.9 26.9,25.0 21.5,25.0 C15.6,25.0 12.5,24.7 12.5,22.7 Z" fill="var(--stone-2)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path><path d="M16.0,16.9 C16.0,13.3 18.9,13.0 22.2,13.0 C26.4,13.0 29.0,14.2 29.0,16.6 C29.0,18.9 26.4,19.0 22.5,19.0 C18.3,19.0 16.0,18.7 16.0,16.9 Z" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"></path></svg>
-<div class="step">
-<p class="num">05</p>
-<h3>Mark the way</h3>
-<p>Notes, code and tests the next person can follow.</p>
-</div>
-</li>
-</ol>
 <div class="principles">
 <div>
 <h3>Prototype early</h3>
