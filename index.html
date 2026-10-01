@@ -102,9 +102,10 @@ a{color:var(--ink)} a:hover{color:var(--accent-strong)}
 .name-note{margin:40px 0 0;max-width:40em;color:var(--muted);font-size:1rem}
 .name-note strong{color:var(--ink);font-weight:600}
 
-.refs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:32px}
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px;margin-top:32px}
 .refs figure{margin:0;border-top:1px solid var(--rule);padding-top:20px;display:flex;flex-direction:column;gap:18px}
-.refs blockquote{margin:0;font-size:1.06rem;line-height:1.6}
+.refs blockquote{margin:0;font-size:1.06rem;line-height:1.6;max-width:62ch}
+.refs .translation{margin:0;max-width:62ch;font-size:.95rem;line-height:1.6;color:var(--muted)}
 .refs figcaption{font:400 .8rem/1.6 var(--mono);color:var(--muted)}
 .refs figcaption strong{display:block;font:600 1rem/1.4 var(--display);color:var(--ink)}
 
@@ -397,19 +398,12 @@ footer a{color:inherit}
 <section class="sec" id="references">
 <div><p class="eyebrow">04 · References</p></div>
 <div>
-<h2>Some of the people we've worked for.</h2>
+<h2>What HY4MAR says.</h2>
 <div class="refs">
 <figure>
-<blockquote>“Vardex built the control system and operator screens for our oxygen plants, plus a simulator that lets us test without touching the equipment. They understand how the plant works quickly, and they speak up when something should be done differently.”</blockquote>
-<figcaption><strong>Ogtech</strong>[Name], [role]</figcaption>
-</figure>
-<figure>
-<blockquote>“We came with an idea and a fairly loosely defined problem. Vardex had a working prototype within a few weeks and were open about what was uncertain along the way. That made decisions easy.”</blockquote>
-<figcaption><strong>Broomstick</strong>[Name], [role]</figcaption>
-</figure>
-<figure>
-<blockquote>“We needed a simulation model of our system and someone who could see the whole picture from physics to software. Vardex delivered both, and documented the work so we could carry on ourselves.”</blockquote>
-<figcaption><strong>Hy4mar</strong>[Name], [role]</figcaption>
+<blockquote lang="nb">“Even har utført et fremragende og presist utviklingsarbeid med den digitale tvillingen for vår patenterte Hydrogen Transfer-prosess finansiert av Innovasjon Norge. Den har høstet mange lovord fra kunder og partnere.”</blockquote>
+<p class="translation" lang="en">“Even has carried out outstanding and precise development work on the digital twin for our patented Hydrogen Transfer process, funded by Innovasjon Norge. It has drawn much praise from customers and partners.”</p>
+<figcaption><strong>HY4MAR AS</strong>Håvard Hjallar, daglig leder</figcaption>
 </figure>
 </div>
 </div>
