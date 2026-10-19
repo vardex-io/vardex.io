@@ -6,6 +6,7 @@ Static one-page website for Vardex. No build step: everything is in `index.html`
 
 ```
 index.html              The page (HTML, CSS and a few lines of JS)
+assets/cairn.js         The binary cairn animation in the hero
 assets/favicon.svg      Browser icon
 assets/favicon-32.png   Fallback browser icon
 assets/apple-touch-icon.png  Home-screen icon on iOS
